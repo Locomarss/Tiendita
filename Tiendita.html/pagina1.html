@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+
+  <!-- Cargar EmailJS -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    emailjs.init("6QmFiKQR4whL6nwXTZjqK"); // Tu User ID real de EmailJS
+  </script>
+
+  <style> 
+    body {
+      text-align: center;
+      margin-top: 320px;
+      background-color: #2c5364;
+      font-family: Garamond Bold;
+    }
+    button {
+      padding: 2px 26px;
+      background-color: #63a8c6;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 100px #fff,
+        0 0 200px #ffff,
+        0 0 30px #ffffff,
+        0 0 40px #ffffff;
+    }
+    input {
+      padding: 4px;
+      width: 250px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+    h1 {
+      color: white;
+      font-size: 3em;
+      text-shadow:
+        0 0 50px #ffffff,
+        0 0 100px #fff,
+        0 0 200px #fff,
+        0 0 30px #fff,
+        0 0 400px #fff;
+    }
+    p {
+      color: white;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Login</h1>
+
+  <p>Gmail:  <input type="email" id="gmail" placeholder="Pepito@gmail.com">
+
+  <p>Contrasena: <input type="password" id="pass" placeholder="Pepito123"> <br> <br>
+
+  <button onclick="validarYredirigir()">Confirmar</button>
+
+  <script>
+    function esCorreoValido(correo) {
+      const expresion = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/;
+      return expresion.test(correo);
+    }
+
+    function validarYredirigir() {
+      const gmail = document.getElementById('gmail').value.trim();
+      const pass = document.getElementById('pass').value.trim();
+
+      if (!esCorreoValido(gmail)) {
+        alert('Por favor, ingresa un correo v?lido');
+        return;
+      }
+
+      if (pass === '') {
+        alert('Por favor, ingresa una contrase?a');
+        return;
+      }
+
+      // Guardar el correo
+      localStorage.setItem("usuarioCorreo", gmail);
+
+      // Enviar correo con EmailJS
+      emailjs.send("service_kkcooqj", "template_lygy4zt", {
+        user_email: gmail
+      }).then(function(response) {
+        console.log("Correo enviado:", response.status);
+      }, function(error) {
+        console.error("Error al enviar el correo:", error);
+      });
+
+      // Redirige a la siguiente p?gina
+      window.location.href = "pagina2.html";
+    }
+  </script>
+
+</body>
+</html>

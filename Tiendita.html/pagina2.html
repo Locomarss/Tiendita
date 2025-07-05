@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Bienvenido</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #bcffcc, #203a43, #2c5364, #2c5364);
+      color: white;
+      text-align: center;
+      padding-top: 100px;
+      font-family: Arial;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px white;
+    }
+    .botones {
+      margin-top: 30px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #63a8c6;
+      border: none;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 5px;
+      margin: 10px;
+    }
+    button:hover {
+      background-color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="saludo">Bienvenido</h1>
+
+  <div class="botones">
+    <button onclick="irASiguiente()">Ir a la siguiente pagina</button>
+    <button onclick="cerrarSesion()">Cerrar sesion</button>
+  </div>
+
+  <script>
+    // Mostrar el correo del usuario
+    const correo = localStorage.getItem("usuarioCorreo");
+
+    if (correo) {
+      document.getElementById("saludo").textContent = "Bienvenido, " + correo;
+    } else {
+      window.location.href = "login.html"; // redirige si no hay sesi?n
+    }
+
+    function cerrarSesion() {
+      localStorage.removeItem("usuarioCorreo");
+      window.location.href = "login.html";
+    }
+
+    function irASiguiente() {
+      window.location.href = "pagina3.html"; // cambia si tu archivo se llama diferente
+    }
+  </script>
+
+</body>
+</html>
